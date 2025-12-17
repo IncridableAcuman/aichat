@@ -1,9 +1,30 @@
-import React from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
-const ThemeProvider = () => {
+const ThemeContext = createContext();
+
+export const ThemeProvider = ({children}) => {
+
+  const [theme,setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  const toggleTheme = () => {
+    setTheme((prev) => prev === 'light' ? 'dark' : 'light');
+  }
+
+  useEffect(()=> {
+    localStorage.setItem('theme',theme);
+  },[theme]);
+
   return (
-    <div>ThemeProvider</div>
+    <>
+    <ThemeContext.Provider value={{theme,toggleTheme}} >
+      {children}
+    </ThemeContext.Provider>
+    </>
   )
 }
 
-export default ThemeProvider
+const UseTheme = () => {
+  const context = useContext(ThemeContext);
+  if(!context) throw new Error("Error context");
+  return context;
+}
