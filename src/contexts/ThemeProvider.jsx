@@ -23,7 +23,7 @@ export const ThemeProvider = ({children}) => {
   )
 }
 
-const UseTheme = () => {
+export const UseTheme = () => {
   const context = useContext(ThemeContext);
   if(!context) throw new Error("Error context");
   return context;
