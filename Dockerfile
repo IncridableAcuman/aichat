@@ -1,10 +1,12 @@
-FROM node:22-alpine as builder
+FROM node:22-alpine AS build
 
 WORKDIR /app
 
+COPY package.*.jaon ./
+
 RUN npm install
 
-COPY package.*.jaon ./
+COPY . .
 
 RUN npm build
 

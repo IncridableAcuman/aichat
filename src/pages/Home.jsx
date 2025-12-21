@@ -11,8 +11,8 @@ const Home = () => {
 
   const openai = new OpenAI({
     apiKey: import.meta.env.VITE_GROQ_API_KEY,
-    baseURL: "https://api.groq.com/openai/v1", // To'g'ri baseURL – ikki marta emas!
-    dangerouslyAllowBrowser: true // Test uchun, productionda backend orqali!
+    baseURL: "https://api.groq.com/openai/v1", 
+    dangerouslyAllowBrowser: true 
   });
 
   const sendMessage = async () => {
@@ -30,10 +30,6 @@ const Home = () => {
     try {
       const response = await openai.chat.completions.create({
         model: 'llama-3.3-70b-versatile', // 2025-yilning eng yaxshi bepul modeli (GPT-4 darajasida)
-        // Boshqa variantlar:
-        // 'openai/gpt-oss-120b' – eng yangi va kuchli (agar mavjud bo'lsa)
-        // 'llama-3.1-70b-versatile' – klassik va tez
-        // 'llama-3.1-8b-instant' – juda tez (mobil uchun ideal)
         messages: [
           { role: 'system', content: 'You are Grok, a helpful and witty AI built by xAI.' },
           ...messages.map(m => ({
